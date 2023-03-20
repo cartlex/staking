@@ -46,7 +46,7 @@ const AddressForm = ({isLoading, setIsLoading}) => {
         placeholder="Amount of ETH"
         className="outline-none rounded-[10px] placeholder:text-center text-left placeholder:text-gray-500 text-zinc-700 w-[420px] h-[40px] hover:bg-slate-100 border-[1px] border-cyan-500 m-[5px] pl-[10px]"
       />
-      <button className="bg-cyan-600 rounded-[10px] w-[150px] h-[30px] text-gray-300 hover:bg-cyan-500 mt-[20px] text-[14px]">
+      <button className="bg-cyan-600 rounded-[10px] w-[150px] h-[30px] text-gray-200 hover:bg-cyan-500 mt-[20px] text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
         Send Transaction
       </button>
     </form>

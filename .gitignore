@@ -23,4 +23,18 @@ yarn-debug.log*
 yarn-error.log*
 
 # env
-/.env
+.env
+
+#hardhat
+
+/hardhat/node_modules
+/hardhat/coverage
+/hardhat/coverage.json
+/hardhat/typechain
+/hardhat/typechain-types
+
+# Hardhat files
+/hardhat/cache
+/hardhat/artifacts
+
+

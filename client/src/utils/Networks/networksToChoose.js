@@ -1,7 +1,11 @@
+import { eth, polygonMatic } from "../../assets";
+
+
 export const networksToChoose = [
   {
     chainId: `0x${Number(137).toString(16)}`,
     chainName: "Polygon Mainnet",
+    image: polygonMatic,
     nativeCurrency: {
       name: "MATIC",
       symbol: "MATIC",
@@ -13,6 +17,7 @@ export const networksToChoose = [
   {
     chainId: `0x${Number(5).toString(16)}`,
     chainName: "Goerli",
+    image: eth,
     nativeCurrency: {
       name: "Goerli Ether",
       symbol: "ETH",
