@@ -2,7 +2,7 @@ import { parseEther } from "ethers";
 import { useState } from "react";
 import walletProvider from "../abi/walletProvider";
 
-const AddressForm = ({isLoading, setIsLoading}) => {
+const AddressForm = ({isLoading, setIsLoading, setModal}) => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState();
 
@@ -22,13 +22,14 @@ const AddressForm = ({isLoading, setIsLoading}) => {
       console.error(error);
     } finally {
       setIsLoading(false);
+      setModal(false);
     }
   };
 
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="flex flex-col justify-center items-center mt-[100px]"
+      className="flex flex-col justify-center items-center"
     >
       <input
         onChange={(e) => setAddress(e.target.value)}
