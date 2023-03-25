@@ -1,11 +1,12 @@
 import { getSlicedAddress } from "../utils/getSlicedAddress";
 
 const ConnectedWallet = ({ address, handleWalletConnectClick }) => {
-
   return address ? (
-    <h1 className="outline-none rounded-[10px] text-center placeholder:text-gray-500 bg-white text-zinc-700 w-[200px] h-[40px] hover:bg-slate-100 border-[1px] border-cyan-500 m-[5px] flex items-center justify-center">
-      {getSlicedAddress(address)}
-    </h1>
+    <div className="flex justify-center flex-col items-center">
+      <h1 className="outline-none rounded-[10px] text-center placeholder:text-gray-500 bg-white text-zinc-700 w-[200px] h-[40px] hover:bg-slate-100 border-[1px] border-cyan-500 m-[5px] flex items-center justify-center">
+        {getSlicedAddress(address)}
+      </h1>
+    </div>
   ) : (
     <button
       onClick={handleWalletConnectClick}
@@ -13,8 +14,6 @@ const ConnectedWallet = ({ address, handleWalletConnectClick }) => {
     >
       Connect wallet
     </button>
-    
-
   );
 };
 

@@ -17,18 +17,18 @@ const config: HardhatUserConfig = {
         hardhat: {
             chainId: 1337
         },
-        optimismgoerli: {
-            url: `https://opt-goerli.g.alchemy.com/v2/${process.env.OPTIMISM_API_KEY}`,
-            accounts: [`0x${process.env.PRIVATE_KEY}`]
-        },
-        mumbai: {
-            url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.MUMBAI_API_KEY}`,
-            accounts: [`0x${process.env.PRIVATE_KEY}`]
-        },
-        arb_goerli: {
-            url: `https://arb-goerli.g.alchemy.com/v2/${process.env.ARBITRUM_API_KEY}`,
-            accounts: [`0x${process.env.PRIVATE_KEY}`]
-        }
+        // optimismgoerli: {
+        //     url: `https://opt-goerli.g.alchemy.com/v2/${process.env.OPTIMISM_API_KEY}`,
+        //     accounts: [`0x${process.env.PRIVATE_KEY}`]
+        // },
+        // mumbai: {
+        //     url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.MUMBAI_API_KEY}`,
+        //     accounts: [`0x${process.env.PRIVATE_KEY}`]
+        // },
+        // arb_goerli: {
+        //     url: `https://arb-goerli.g.alchemy.com/v2/${process.env.ARBITRUM_API_KEY}`,
+        //     accounts: [`0x${process.env.PRIVATE_KEY}`]
+        // }
     },
     etherscan: {
         apiKey: process.env.ARBITRUM_VERIFY_API // for verification

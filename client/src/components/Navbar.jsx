@@ -1,13 +1,13 @@
-import { parseEther, parseUnits } from "ethers";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import walletProvider from "../abi/walletProvider";
+import { AppContext } from "../context";
 import { networksToChoose } from "../utils/Networks/networksToChoose";
 import ConnectedWallet from "./ConnectedWallet";
 import Network from "./Network";
 
 const Navbar = () => {
-  const [address, setAddress] = useState("");
   const [network, setNetwork] = useState([]);
+  const { address, setAddress } = useContext(AppContext);
 
   const handleWalletConnectClick = async () => {
     try {
@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end h-[80px] items-center">
       <div className="justify-end items-center flex flex-col">
         {address ? (
           <>
