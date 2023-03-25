@@ -60,7 +60,7 @@ contract Staking {
     }
 
     function earned(address _account) public view returns(uint) {
-        (_balances[_account] * (rewardPerToken() - userRewardPerTokenPaid[_account]) / 1e18) + rewards[_account];
+        return (_balances[_account] * (rewardPerToken() - userRewardPerTokenPaid[_account]) / 1e18) + rewards[_account];
     }
 
 }

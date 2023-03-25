@@ -1,5 +1,5 @@
-import { AlchemyProvider, InfuraProvider } from "ethers";
+import { AlchemyProvider } from "ethers";
 
-const defaultProvier = new AlchemyProvider(process.env.mumbaiNetwork);
+const defaultProvider = new AlchemyProvider("maticmum");
 
-export default defaultProvier;
+export default defaultProvider;

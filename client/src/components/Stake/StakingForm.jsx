@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import getStakingWithSigner from "../../abi/Staking/getStakingWithSigner";
+import staking from "../../abi/Staking/Staking";
 import { AppContext } from "../../context";
 
 const StakingForm = ({ setIsLoading, setVisible }) => {
@@ -6,29 +8,42 @@ const StakingForm = ({ setIsLoading, setVisible }) => {
 
   const [stakingAmount, setStakingAmount] = useState(0);
   const [currentStake, setCurrentStake] = useState(0);
+  const [earned, setEarned] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      const earnedTokens = await staking.earned();
+      console.log(earnedTokens);
+      setEarned(earnedTokens);
+    })();
+  }, [earned]);
+  //   const handleEarnedClick = async () => {
+
+  //   }
+
+  //   useEffect(() => {
+  //     handleEarnedClick()
+  //   }, [earned]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       setIsLoading(true);
+      const contract = await getStakingWithSigner();
+      const tx = await contract.stake(currentStake);
+      await tx.wait();
       setCurrentStake(currentStake + Number(stakingAmount));
-      //   setStakingAmount()
-      //   const providerWithSigner = await walletProvider.getSigner();
-      //   const tx = await providerWithSigner.sendTransaction({
-      //     to: address,
-      //     value: parseEther(amount),
-      //   });
-      //   await tx.wait();
-    //   setStakingAmount("");
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
-    //   setVisible(false);
+      //   setVisible(false);
     }
   };
 
-  console.log(currentStake);
+  useEffect(() => {
+    handleFormSubmit();
+  }, [currentStake]);
 
   return (
     <div className="flex flex-col justify-between items-center border-[1px] rounded-[20px] border-slate-600 h-[250px]  bg-cyan-700">
@@ -52,6 +67,7 @@ const StakingForm = ({ setIsLoading, setVisible }) => {
           Stake
         </button>
       </form>
+      <h1>{currentStake}</h1>
     </div>
   );
 };
