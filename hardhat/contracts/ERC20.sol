@@ -3,6 +3,8 @@ pragma solidity^0.8.17;
 
 import "./IERC20.sol";
 
+/// @title ERC20 token contract
+/// @author cartlex
 contract ERC20 is IERC20 {
     mapping(address => uint) public _balances;
     mapping(address => mapping(address => uint)) _allowances;

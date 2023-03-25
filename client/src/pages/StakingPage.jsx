@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import Footer from "../components/Footer";
 import GetReward from "../components/GetReward/GetReward";
 import Logo from "../components/Logo";
+import Mint from "../components/Mint";
 import Navbar from "../components/Navbar";
 import Stake from "../components/Stake/Stake";
 import Withdraw from "../components/Withdraw/Withdraw";
@@ -15,6 +16,8 @@ const StakingPage = () => {
         Staking platform
       </h1>
       <Stake />
+      <Mint />
+
       {/* <Withdraw /> */}
       {/* <GetReward />
       <Footer /> */}

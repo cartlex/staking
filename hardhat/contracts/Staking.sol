@@ -3,6 +3,8 @@ pragma solidity^0.8.0;
 
 import "./IERC20.sol";
 
+/// @title Staking contract
+/// @author cartlex
 contract Staking {
     IERC20 public rewardsToken;
     IERC20 public stakingToken;

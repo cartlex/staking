@@ -67,7 +67,6 @@ const StakingForm = ({ setIsLoading, setVisible }) => {
           Stake
         </button>
       </form>
-      <h1>{currentStake}</h1>
     </div>
   );
 };

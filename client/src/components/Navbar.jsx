@@ -3,7 +3,6 @@ import walletProvider from "../abi/walletProvider";
 import { AppContext } from "../context";
 import { networksToChoose } from "../utils/Networks/networksToChoose";
 import ConnectedWallet from "./ConnectedWallet";
-import Mint from "./Mint";
 import Network from "./Network";
 
 const Navbar = () => {
@@ -44,8 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between h-[100px] items-center">
-        <Mint address={address}/>
+    <div className="flex justify-end h-[100px] items-center">
       <div className="justify-end items-center flex flex-col">
         {address ? (
           <>

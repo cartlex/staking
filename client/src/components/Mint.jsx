@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import getStakingTokenWithSigner from "../abi/StakingToken/getStakingTokenWithSigner";
+import { AppContext } from "../context";
 
-const Mint = ({ address }) => {
+const Mint = ({  }) => {
   const mintRef = useRef();
+  const { address } = useContext(AppContext);
 
   const handleMintSubmit = async (event) => {
     event.preventDefault();
@@ -18,7 +20,7 @@ const Mint = ({ address }) => {
   return (
     <form
       onSubmit={handleMintSubmit}
-      className="flex flex-col justify-center items-center ml-[25px]"
+      className="flex flex-col justify-center items-center mt-[15px]"
     >
       <button className="bg-cyan-600 rounded-[10px] w-[150px] h-[30px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
         Mint

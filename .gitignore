@@ -36,5 +36,6 @@ yarn-error.log*
 # Hardhat files
 /hardhat/cache
 /hardhat/artifacts
+/hardhat/hardhat.config.ts
 
 
