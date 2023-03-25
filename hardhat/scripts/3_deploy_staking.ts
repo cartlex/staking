@@ -1,15 +1,17 @@
 import { ethers } from "hardhat";
 
 const main = async () => {
-    const RewardingToken = "0xd679d486aa519FAc153Cc4fC55AA76FDAaec7a7D";
-    const StakingToken = "0x0EaEA708313028a303775f7cEa9b8689C2F153DD"
+  const StakingToken = "0x2885CaDfAa67Bfa3A96961de436B1276A1d36701";
+  const RewardingToken = "0x89e20C16469B006Fa06eAFbfcF86B2b619283BE4";
+
   const [deployer] = await ethers.getSigners();
   const Factory = await ethers.getContractFactory("Staking");
   const staking = await Factory.deploy(StakingToken, RewardingToken);
   await staking.deployed();
 
-  console.log(`Contract successfully deployed with address: ${staking.address}`)
-
+  console.log(
+    `Contract successfully deployed with address: ${staking.address}`
+  );
 };
 
 // We recommend this pattern to be able to use async/await everywhere
