@@ -1,41 +1,21 @@
 import { Contract } from "ethers";
 import defaultProvider from "../defaultProvider";
 
-const address = "0xd418971B234ffbc2F8B8Bdcd0f98AaE06454A83E";
+const address = "0x12598fe6391e0e13Fa2544D5757517A4cF4bf842";
 
 const abi = [
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_stakingToken",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_rewardsToken",
-        type: "address",
-      },
+      { internalType: "address", name: "_stakingToken", type: "address" },
+      { internalType: "address", name: "_rewardsToken", type: "address" },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_account",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "_account", type: "address" }],
     name: "earned",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
@@ -49,95 +29,47 @@ const abi = [
   {
     inputs: [],
     name: "lastUpdateTime",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "rewardPerToken",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "rewardPerTokenStored",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "rewardRate",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "rewards",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "rewardsToken",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
-      },
-    ],
+    outputs: [{ internalType: "contract IERC20", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ internalType: "uint256", name: "amount", type: "uint256" }],
     name: "stake",
     outputs: [],
     stateMutability: "nonpayable",
@@ -146,43 +78,19 @@ const abi = [
   {
     inputs: [],
     name: "stakingToken",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address",
-      },
-    ],
+    outputs: [{ internalType: "contract IERC20", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "userRewardPerTokenPaid",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
     name: "withdraw",
     outputs: [],
     stateMutability: "nonpayable",

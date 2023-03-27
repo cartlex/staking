@@ -9,18 +9,18 @@ import Withdraw from "../components/Withdraw/Withdraw";
 const StakingPage = () => {
 
   return (
-    <div className="h-screen bg-gradient-to-br from-teal-300 to-sky-500">
+    <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500">
       <Navbar />
       <Logo />
       <h1 className="font-medium flex items-center justify-center text-[40px] text-slate-600 font-mono">
         Staking platform
       </h1>
       <Stake />
+      <GetReward />
+      <Withdraw />
       <Mint />
 
-      {/* <Withdraw /> */}
-      {/* <GetReward />
-      <Footer /> */}
+      <Footer /> 
     </div>
   );
 };

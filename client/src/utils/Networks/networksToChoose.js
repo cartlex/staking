@@ -15,16 +15,16 @@ export const networksToChoose = [
     blockExplorerUrls: ["https://polygonscan.com/"],
   },
   {
-    chainId: `0x${Number(5).toString(16)}`,
-    chainName: "Goerli",
+    chainId: `0x${Number(11155111).toString(16)}`,
+    chainName: "Sepolia",
     image: eth,
     nativeCurrency: {
-      name: "Goerli Ether",
-      symbol: "ETH",
+      name: "Sepolia Ether",
+      symbol: "SepoliaETH",
       decimals: 18,
     },
-    rpcUrls: ["https://goerli.infura.io/v3/"],
-    blockExplorerUrls: ["https://goerli.etherscan.io/"],
+    rpcUrls: ["https://eth-sepolia.g.alchemy.com/v2/"],
+    blockExplorerUrls: ["https://sepolia.etherscan.io/"],
   },
   {
     chainId: `0x${Number(80001).toString(16)}`,

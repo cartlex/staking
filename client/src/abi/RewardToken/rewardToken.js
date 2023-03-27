@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import defaultProvider from "../defaultProvider";
 
-const address = "0x2885CaDfAa67Bfa3A96961de436B1276A1d36701";
+const address = "0x89e20C16469B006Fa06eAFbfcF86B2b619283BE4";
 
 const abi = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
@@ -191,6 +191,6 @@ const abi = [
   },
 ];
 
-const stakingToken = new Contract(address, abi, defaultProvider);
+const rewardToken = new Contract(address, abi, defaultProvider);
 
-export default stakingToken;
+export default rewardToken;

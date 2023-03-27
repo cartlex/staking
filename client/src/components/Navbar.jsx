@@ -43,7 +43,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-end h-[100px] items-center">
+    <div className="flex justify-end h-[80px] items-center w-full fixed top-0">
       <div className="justify-end items-center flex flex-col">
         {address ? (
           <>
@@ -58,6 +58,7 @@ const Navbar = () => {
           </>
         ) : (
           <ConnectedWallet
+          
             address={address}
             handleWalletConnectClick={handleWalletConnectClick}
           />
