@@ -1,5 +1,4 @@
-import { eth, polygonMatic } from "../../assets";
-
+import { eth, polygonMatic, optimism } from "../../assets";
 
 export const networksToChoose = [
   {
@@ -29,6 +28,7 @@ export const networksToChoose = [
   {
     chainId: `0x${Number(80001).toString(16)}`,
     chainName: "Mumbai",
+    image: polygonMatic,
     nativeCurrency: {
       name: "MATIC",
       symbol: "MATIC",
@@ -44,6 +44,7 @@ export const networksToChoose = [
   {
     chainId: `0x${Number(10).toString(16)}`,
     chainName: "Optimism",
+    image: optimism,
     nativeCurrency: {
       name: "Ether",
       symbol: "ETH",

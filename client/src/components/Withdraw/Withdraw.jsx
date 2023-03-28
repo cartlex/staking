@@ -46,7 +46,7 @@ const Withdraw = () => {
           min={1}
           step={1}
           placeholder="Withdraw amount"
-          className="outline-none rounded-[10px] placeholder:text-center text-left placeholder:text-gray-500 text-zinc-700 w-[150px] text-[14px] h-[30px] hover:bg-slate-100 border-[1px] border-cyan-500 m-[5px] pl-[10px]"
+          className="outline-none rounded-[10px] placeholder:text-center text-center placeholder:text-gray-500 text-zinc-700 w-[150px] text-[14px] h-[30px] hover:bg-slate-100 border-[1px] border-cyan-500 m-[5px] pl-[10px]"
         />
       )}
     </form>
