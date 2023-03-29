@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
+import Navbar from "./components/Navbar";
 import { AppContext } from "./context";
 import StakingPage from "./pages/StakingPage";
 
@@ -7,7 +10,7 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState();
-//   const [stakeModal, setStakeModal] = useState(false);
+  //   const [stakeModal, setStakeModal] = useState(false);
   return (
     <AppContext.Provider
       value={{
@@ -21,8 +24,9 @@ const App = () => {
         setAmount,
       }}
     >
-        
-      <StakingPage />
+      <BrowserRouter>
+        <AppRouter/>
+      </BrowserRouter>
     </AppContext.Provider>
   );
 };

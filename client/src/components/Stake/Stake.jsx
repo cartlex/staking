@@ -1,35 +1,35 @@
-import { useContext } from "react";
-import MyModal from "../UI/MyModal/MyModal";
+import { useContext, useState } from "react";
 import { AppContext } from "../../context";
-import Loader from "../UI/Loader";
-import StakeButton from "./StakeButton";
-import StakingForm from "./StakingForm";
-import { useState } from "react";
 
 const Stake = () => {
-  const { isLoading, setIsLoading, modal, setModal } = useContext(AppContext);
-  const [visible, setVisible] = useState(false);
+  const { isLoading, setIsLoading } = useContext(AppContext);
+  const [balance, setBalance] = useState(10);
 
-  const handleModalClick = () => {
-    setModal(true);
+  const handleFormSubmit = (e) => {
+    e.preventDefault;
   };
-
   return (
-    <>
-      {!modal && <StakeButton handleModalClick={handleModalClick} />}
-      <MyModal visible={modal} setVisible={setModal}>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <StakingForm
-            // isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            setVisible={setModal}
-            // setModal={handleModalClick}
+    <div className="flex flex-col justify-between items-center bg-black bg-opacity-40 w-[500px] h-[400px] rounded-[10px] relative ">
+      <div className="flex justify-between items-center mt-[20px]">
+        <h1 className="flex items-center justify-center m-[10px] text-zinc-300 bg-slate-700 bg-opacity-30 w-full text-center rounded-[10px] h-[40px]">
+          Your current balance: {balance}
+        </h1>
+        <h1 className="flex items-center justify-center m-[10px] text-zinc-300 bg-slate-700 bg-opacity-30 w-full text-center rounded-[10px] h-[40px]">
+          Your current balance: {balance}
+        </h1>
+      </div>
+      <div className="flex items-center flex-col justify-center">
+        <form onSubmit={handleFormSubmit}>
+          <input
+            className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300"
+            placeholder="Amount to stake"
           />
-        )}
-      </MyModal>
-    </>
+          <button className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
+            Stake
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

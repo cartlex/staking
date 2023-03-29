@@ -3,7 +3,7 @@ import { eth, polygonMatic, optimism } from "../../assets";
 export const networksToChoose = [
   {
     chainId: `0x${Number(137).toString(16)}`,
-    chainName: "Polygon Mainnet",
+    chainName: "Polygon",
     image: polygonMatic,
     nativeCurrency: {
       name: "MATIC",
