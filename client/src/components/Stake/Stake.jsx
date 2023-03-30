@@ -11,10 +11,10 @@ const Stake = () => {
   return (
     <div className="flex flex-col justify-between items-center bg-black bg-opacity-40 w-[500px] h-[400px] rounded-[10px] relative ">
       <div className="flex justify-between items-center mt-[20px]">
-        <h1 className="flex items-center justify-center m-[10px] text-zinc-300 bg-slate-700 bg-opacity-30 w-full text-center rounded-[10px] h-[40px]">
+        <h1 className="flex items-center justify-center m-[10px] text-zinc-300 bg-slate-700 bg-opacity-30 w-[200px] text-center rounded-[10px] h-[40px]">
           Your current balance: {balance}
         </h1>
-        <h1 className="flex items-center justify-center m-[10px] text-zinc-300 bg-slate-700 bg-opacity-30 w-full text-center rounded-[10px] h-[40px]">
+        <h1 className="flex items-center justify-center m-[10px] text-zinc-300 bg-slate-700 bg-opacity-30 w-[200px] text-center rounded-[10px] h-[40px]">
           Your current balance: {balance}
         </h1>
       </div>

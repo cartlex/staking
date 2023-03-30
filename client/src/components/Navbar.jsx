@@ -31,18 +31,6 @@ const Navbar = () => {
       setNetwork(networkId);
     } catch (error) {
       console.error(error);
-
-      //   try {
-      //     if (error.code === 4902) {
-      //       await walletProvider.send("wallet_addEthereumChain", [
-      //         { chainId: networkId },
-      //         { rpcUrl: ["https://optimistic.etherscan.io"] },
-      //       ]);
-      //       setNetwork(networkId);
-      //     }
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
     }
   };
 

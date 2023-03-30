@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Network = ({ changeNetwork, networksToChoose, network, setNetwork }) => {
   const [toggleDrawer, setTogglerDrawer] = useState(false);
-  const [isActive, setIsActive] = useState();
+  const [isActive, setIsActive] = useState(false);
 
   const handleNetworkClick = (networkToChoose) => {
     setNetwork(networkToChoose);
