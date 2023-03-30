@@ -1,15 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import walletProvider from "../abi/walletProvider";
 import { AppContext } from "../context";
 import { networksToChoose } from "../utils/Networks/networksToChoose";
+import Button from "./Button";
 import ConnectedWallet from "./ConnectedWallet";
 import Network from "./Network";
-import Button from "./Button";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [network, setNetwork] = useState([]);
-  const { address, setAddress } = useContext(AppContext);
+  const { address, setAddress, network, setNetwork } = useContext(AppContext);
 
   const handleWalletConnectClick = async () => {
     try {
@@ -21,6 +20,10 @@ const Navbar = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    handleWalletConnectClick()
+  }, [address]);
 
   const changeNetwork = async (e) => {
     const networkId = e.target.value;
@@ -44,12 +47,11 @@ const Navbar = () => {
           <Button name="Account" />
         </Link>
         <Link to="/about">
-        <Button
-          name="About"
-          onClick={() => setIsAboutActive((prev) => !prev)}
-        ></Button>
+          <Button
+            name="About"
+            onClick={() => setIsAboutActive((prev) => !prev)}
+          ></Button>
         </Link>
-        
       </div>
       <div className="justify-end items-center flex flex-row">
         {address ? (

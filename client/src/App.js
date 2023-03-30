@@ -10,7 +10,9 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState();
-  //   const [stakeModal, setStakeModal] = useState(false);
+  const [balance, setBalance] = useState(0);
+  const [network, setNetwork] = useState([]);
+
   return (
     <AppContext.Provider
       value={{
@@ -22,10 +24,14 @@ const App = () => {
         amount,
         setAddress,
         setAmount,
+        balance,
+        setBalance,
+        network,
+        setNetwork
       }}
     >
       <BrowserRouter>
-        <AppRouter/>
+        <AppRouter />
       </BrowserRouter>
     </AppContext.Provider>
   );
