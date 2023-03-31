@@ -5,20 +5,23 @@ const Stake = () => {
   const { isLoading, setIsLoading } = useContext(AppContext);
   const [balance, setBalance] = useState(10);
   const [variant, setVariant] = useState("stake");
-  const [bgActive, setBgActive] = useState(true);
+  const [amountToWithdraw, setAmountToWithdraw] = useState();
+  const [amountToStake, setAmountToStake] = useState();
 
   const handleFormSubmit = (e) => {
-    e.preventDefault;
+    e.preventDefault();
+    // setAmountToWithdraw("");
+    // setAmountToStake("");
   };
 
   const handleStakeClick = () => {
     setVariant("stake");
-    setBgActive((prev) => !prev);
+    // setAmountToWithdraw(0);
   };
 
   const handleUnstakeClick = () => {
     setVariant("unstake");
-    setBgActive((prev) => !prev);
+    // setAmountToStake("");
   };
 
   return (
@@ -27,7 +30,7 @@ const Stake = () => {
         <button
           onClick={handleStakeClick}
           className={`cursor-pointer text-zinc-300  hover:placeholder:text-slate-200 hover:text-white ${
-            bgActive ? "bg-black bg-opacity-50 rounded-[5px] px-[5px]" : ""
+            variant === "stake" ? "bg-black bg-opacity-50 rounded-[5px] px-[5px]" : ""
           }`}
         >
           Stake
@@ -35,7 +38,7 @@ const Stake = () => {
         <button
           onClick={handleUnstakeClick}
           className={`cursor-pointer text-zinc-300  hover:placeholder:text-slate-200 hover:text-white ${
-            !bgActive ? "bg-black bg-opacity-50 rounded-[5px] px-[5px]" : ""
+            variant === "unstake" ? "bg-black bg-opacity-50 rounded-[5px] px-[5px]" : ""
           }`}
         >
           Unstake
@@ -59,11 +62,13 @@ const Stake = () => {
               <label htmlFor="stake"></label>
               <input
                 required
+              onChange={(e) => setAmountToStake(e.target.value)}
+
                 type="number"
                 min={1}
                 step={1}
                 id="stake"
-                className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200"
+                className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200 hover:bg-opacity-50"
                 placeholder="Amount to stake"
               />
               <button className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
@@ -98,12 +103,13 @@ const Stake = () => {
             <form onSubmit={handleFormSubmit}>
               <label htmlFor="withdraw"></label>
               <input
+              onChange={(e) => setAmountToWithdraw(e.target.value)}
                 required
                 type="number"
                 min={1}
                 step={1}
                 id="withdraw"
-                className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200"
+                className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200 hover:bg-opacity-50"
                 placeholder="Amount to withdraw"
               />
               <button className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
