@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import walletProvider from "../abi/walletProvider";
@@ -25,17 +26,16 @@ const Navbar = () => {
     handleWalletConnectClick()
   }, [address]);
 
-  const changeNetwork = async (e) => {
-    const networkId = e.target.value;
-    try {
-      await walletProvider.send("wallet_switchEthereumChain", [
-        { chainId: networkId },
-      ]);
-      setNetwork(networkId);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const handleAccountClick = () => {
+    setIsActive("account");
+  }
+  const handleStakingClick = () => {
+    setIsActive("staking");
+  }
+
+  const handleAboutClick = () => {
+    setIsActive("about");
+  }
 
   return (
     <div className="flex justify-between h-[80px] items-center w-full fixed top-0">
@@ -49,7 +49,7 @@ const Navbar = () => {
         <Link to="/about">
           <Button
             name="About"
-            onClick={() => setIsAboutActive((prev) => !prev)}
+            // onClick={() => setIsAboutActive((prev) => !prev)}
           ></Button>
         </Link>
       </div>
@@ -59,7 +59,6 @@ const Navbar = () => {
             <Network
               setNetwork={setNetwork}
               network={network}
-              changeNetwork={changeNetwork}
               networksToChoose={networksToChoose}
             />
             <ConnectedWallet

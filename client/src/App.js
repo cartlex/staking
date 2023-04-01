@@ -14,7 +14,7 @@ const App = () => {
   const [network, setNetwork] = useState([]);
 
   return (
-    <AppContext.Provider
+    <AppContext.Provider 
       value={{
         isLoading,
         setIsLoading,

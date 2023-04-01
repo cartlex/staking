@@ -50,9 +50,19 @@ export const networksToChoose = [
       symbol: "ETH",
       decimals: 18,
     },
-    rpcUrls: [
-        "https://mainnet.optimism.io/",
-    ],
+    rpcUrls: ["https://mainnet.optimism.io/"],
     blockExplorerUrls: ["https://optimistic.etherscan.io"],
+  },
+  {
+    chainId: `0x${Number(10).toString(16)}`,
+    blockExplorerUrls: ["https://optimistic.etherscan.io"],
+    chainName: "Optimism",
+    iconUrls: optimism,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    rpcUrls: ["https://mainnet.optimism.io/"],
   },
 ];

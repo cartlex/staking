@@ -19,7 +19,7 @@ const Account = () => {
 
   return (
     <>
-      <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500">
+      <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500 font-oswald">
         <Navbar />
         <h1 className="text-white text-[40px] fixed top-[100px]">Account</h1>
         <div className="flex flex-col w-4/5 h-[500px] top-[175px] fixed bg-black bg-opacity-50 rounded-[10px] justify-start">

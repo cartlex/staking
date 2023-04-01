@@ -7,7 +7,7 @@ const Start = () => {
 
   return (
     <>
-      <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500">
+      <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500 font-oswald">
         <Navbar />
         <h1 className="font-medium flex justify-center text-[40px] text-slate-600 font-mono fixed top-[175px]">
           Staking platform

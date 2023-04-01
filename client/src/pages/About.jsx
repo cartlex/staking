@@ -9,11 +9,11 @@ const Start = () => {
 
   return (
     <>
-      <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500">
+      <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500 font-oswald">
         <Navbar />
         <h1 className="text-white text-[40px] fixed top-[100px]">Stake your funds in differnet currencies</h1>
         <div className="fixed left-[50px] top-[200px] w-[600px] h-[500px] bg-black bg-opacity-50 rounded-[10px]">
-          <h1 className="font-medium text-[20px] text-zinc-300 font-mono m-[30px] ">
+          <h1 className="text-[20px] text-zinc-300 m-[30px] ">
             Staking protocol is a new place where you can earn money staking them 
           </h1>
         </div>
