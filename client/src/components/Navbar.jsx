@@ -26,17 +26,6 @@ const Navbar = () => {
     handleWalletConnectClick()
   }, [address]);
 
-  const handleAccountClick = () => {
-    setIsActive("account");
-  }
-  const handleStakingClick = () => {
-    setIsActive("staking");
-  }
-
-  const handleAboutClick = () => {
-    setIsActive("about");
-  }
-
   return (
     <div className="flex justify-between h-[80px] items-center w-full fixed top-0">
       <div className="w-[360px] flex justify-between items-center ml-[50px]">

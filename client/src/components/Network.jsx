@@ -1,23 +1,17 @@
-import { AnkrProvider } from "ethers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import defaultProvider from "../abi/defaultProvider";
 import walletProvider from "../abi/walletProvider";
 
 const Network = ({ networksToChoose }) => {
   const [toggleDrawer, setTogglerDrawer] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [network, setNetwork] = useState([networksToChoose]);
+  const [network, setNetwork] = useState([]);
 
   const handleNetworkClick = (networkToChoose) => {
     setNetwork(networkToChoose);
     setIsActive(networkToChoose.chainName);
     changeNetwork(networkToChoose);
   };
-
-  const getNet = async () => {
-    const { chainId } = await walletProvider.getNetwork();
-    console.log(chainId);
-  };
-  getNet();
 
   const changeNetwork = async (networkId) => {
     try {
@@ -26,9 +20,8 @@ const Network = ({ networksToChoose }) => {
       ]);
       setNetwork(networkId);
     } catch (switchError) {
-      if (switchError.code === 4902) {
+      if (switchError.code === -32602) {
         try {
-          console.log(chainId);
           await walletProvider.send("wallet_addEthereumChain", [
             { chainId: networkId.chainId },
           ]);

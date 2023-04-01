@@ -14,7 +14,7 @@ const Account = () => {
       const balance = await walletProvider.getBalance(address);
       setBalance(Number(formatEther(balance)).toFixed(2));
     })();
-  }, [balance, address]);
+  }, [balance, address, network]);
 
 
   return (
@@ -26,7 +26,7 @@ const Account = () => {
           <div className="flex flex-row p-[20px]  text-white text-[20px] m-[20px] h-[40px rounded-[10px] border-[1px]">
             <h1 className="flex justify-center items-center w-[200px] text-zinc-300 hover:text-white">Current network:</h1>
             <div className="flex justify-start items-center p-[10px] w-[500px] text-zinc-300 hover:text-white text-[20px] h-[40px] bg-black bg-opacity-30 rounded-[10px] ">
-            {network.chainName}
+            {network && network.chainName}
             </div>
           </div>
           <div className="flex flex-row p-[20px]  text-white text-[20px] m-[20px] h-[40px rounded-[10px] border-[1px]">
