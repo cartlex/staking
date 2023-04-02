@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AppContext } from "../context";
-import StakingPage from "../pages/StakingPage";
-import Start from "../pages/Start";
-import Error from "../pages/Error";
 import About from "../pages/About";
 import Account from "../pages/Account";
+import Error from "../pages/Error";
+import StakingPage from "../pages/StakingPage";
+import Loader from "./UI/Loader";
 
 const AppRouter = () => {
     const { isLoading } = useContext(AppContext);

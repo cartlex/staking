@@ -22,9 +22,9 @@ const Navbar = () => {
     }
   };
 
-  useEffect(() => {
-    handleWalletConnectClick()
-  }, [address]);
+//   useEffect(() => {
+//     handleWalletConnectClick()
+//   }, [address]);
 
   return (
     <div className="flex justify-between h-[80px] items-center w-full fixed top-0">

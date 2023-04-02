@@ -1,0 +1,50 @@
+import { useContext } from "react";
+import { AppContext } from "../../context";
+import Loader from "../UI/Loader";
+
+const StakeWindow = ({ handleFormSubmit, amountToStake, setAmountToStake }) => {
+  const { isLoading, setIsLoading } = useContext(AppContext);
+
+  return (
+    <div>
+      <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px] ">
+        <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <div>
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                Amount
+              </h1>
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                Balance: 100000.00
+              </h1>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-[20px]"></div>
+      <div className="flex items-center flex-col justify-center">
+        <form onSubmit={handleFormSubmit}>
+          <label htmlFor="stake"></label>
+          <input
+            required
+            onChange={(e) => setAmountToStake(e.target.value)}
+            value={amountToStake}
+            type="number"
+            min={1}
+            step={1}
+            id="stake"
+            className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200 hover:bg-opacity-50"
+            placeholder="Amount to stake"
+          />
+          <button className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
+            Stake
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default StakeWindow;
