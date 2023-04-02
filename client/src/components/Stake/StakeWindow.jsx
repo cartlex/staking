@@ -1,10 +1,11 @@
-import { useContext } from "react";
-import { AppContext } from "../../context";
 import Loader from "../UI/Loader";
 
-const StakeWindow = ({ handleFormSubmit, amountToStake, setAmountToStake }) => {
-  const { isLoading, setIsLoading } = useContext(AppContext);
-
+const StakeWindow = ({
+  handleStakeSubmit,
+  setAmountToStake,
+  amountToStake,
+  isLoading,
+}) => {
   return (
     <div>
       {isLoading ? (
@@ -23,9 +24,10 @@ const StakeWindow = ({ handleFormSubmit, amountToStake, setAmountToStake }) => {
       )}
       <div className="flex justify-between items-center mt-[20px]"></div>
       <div className="flex items-center flex-col justify-center">
-        <form onSubmit={handleFormSubmit} >
+        <form onSubmit={handleStakeSubmit}>
           <label htmlFor="stake"></label>
-          <input 
+          <input
+            disabled={isLoading}
             required
             onChange={(e) => setAmountToStake(e.target.value)}
             value={amountToStake}
@@ -33,10 +35,13 @@ const StakeWindow = ({ handleFormSubmit, amountToStake, setAmountToStake }) => {
             min={1}
             step={1}
             id="stake"
-            className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200 hover:bg-opacity-50"
+            className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200 hover:bg-opacity-50 disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
             placeholder="Amount to stake"
           />
-          <button className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white">
+          <button
+            disabled={isLoading}
+            className="flex items-center justify-center m-[10px] bg-cyan-500 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
+          >
             Stake
           </button>
         </form>

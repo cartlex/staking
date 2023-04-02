@@ -1,5 +1,4 @@
-import { ethers } from "ethers";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import walletProvider from "../abi/walletProvider";
 import { AppContext } from "../context";
@@ -15,16 +14,11 @@ const Navbar = () => {
     try {
       const account = await walletProvider.send("eth_requestAccounts", []);
       setAddress(account[0]);
-      setNetwork(account[0]);
       return account[0];
     } catch (error) {
       console.error(error);
     }
   };
-
-//   useEffect(() => {
-//     handleWalletConnectClick()
-//   }, [address]);
 
   return (
     <div className="flex justify-between h-[80px] items-center w-full fixed top-0">
