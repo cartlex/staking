@@ -10,9 +10,9 @@ import Loader from "./UI/Loader";
 const AppRouter = () => {
     const { isLoading } = useContext(AppContext);
 
-    if(isLoading) {
-        return <Loader/>
-    }
+    // if(isLoading) {
+    //     return <Loader/>
+    // }
 
   return (
     <Routes>

@@ -7,27 +7,25 @@ const StakeWindow = ({ handleFormSubmit, amountToStake, setAmountToStake }) => {
 
   return (
     <div>
-      <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px] ">
-        <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <div>
-              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Amount
-              </h1>
-              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Balance: 100000.00
-              </h1>
-            </div>
-          )}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px]">
+          <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
+            <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+              Amount
+            </h1>
+            <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+              Balance: 100000.00
+            </h1>
+          </div>
         </div>
-      </div>
+      )}
       <div className="flex justify-between items-center mt-[20px]"></div>
       <div className="flex items-center flex-col justify-center">
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} >
           <label htmlFor="stake"></label>
-          <input
+          <input 
             required
             onChange={(e) => setAmountToStake(e.target.value)}
             value={amountToStake}

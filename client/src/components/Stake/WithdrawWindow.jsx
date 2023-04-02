@@ -11,25 +11,29 @@ const WithdrawWindow = ({
 
   return (
     <div>
-      <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px] ">
-        <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
-          <div className="flex flex-col">
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px] ">
+          <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
+            <div className="flex flex-col">
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                Amount
+              </h1>
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                Matic token
+              </h1>
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                Earned:
+              </h1>
+            </div>
+
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Amount
-            </h1>
-            <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Matic token
-            </h1>
-            <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Earned:
+              Staked: 20.00
             </h1>
           </div>
-
-          <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-            Staked: 20.00
-          </h1>
         </div>
-      </div>
+      )}
       <div className="flex justify-between items-center mt-[20px]"></div>
       <div className="flex items-center flex-col justify-center">
         {isLoading ? (
