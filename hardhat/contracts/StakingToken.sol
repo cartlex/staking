@@ -5,6 +5,7 @@ import "./ERC20.sol";
 
 /// @title StakingToken contract
 /// @author cartlex
+
 contract StakingToken is ERC20 {
     constructor() ERC20("Staking", "ST") {}
 }

@@ -1,21 +1,22 @@
 // SPDX-License-Identifier: MIT
-pragma solidity^0.8.0;
+pragma solidity^0.8.17;
 
 import "./IERC20.sol";
 
 /// @title Staking contract
 /// @author cartlex
+
 contract Staking {
     IERC20 public rewardsToken;
     IERC20 public stakingToken;
 
-    uint public rewardRate = 10;
+    uint public constant REWARD_RATE = 1;
     uint public lastUpdateTime;
     uint public rewardPerTokenStored;
 
     mapping(address => uint) public userRewardPerTokenPaid;
     mapping(address => uint) public rewards;
-    mapping(address => uint) private _balances;
+    mapping(address => uint) public _balances;
 
     uint private _totalSupply;
 
@@ -57,7 +58,7 @@ contract Staking {
         }
         
         return rewardPerTokenStored + (
-            rewardRate * (block.timestamp - lastUpdateTime)
+            REWARD_RATE * (block.timestamp - lastUpdateTime)
         ) * 1e18 / _totalSupply;
     }
 

@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import defaultProvider from "../defaultProvider";
 
-const address = "0x12598fe6391e0e13Fa2544D5757517A4cF4bf842";
+export const stakingAddress = "0x8F3A64D4cB8FEf31c57b27427F8FE922965F55A4";
 
 const abi = [
   {
@@ -11,6 +11,20 @@ const abi = [
     ],
     stateMutability: "nonpayable",
     type: "constructor",
+  },
+  {
+    inputs: [],
+    name: "REWARD_RATE",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "_balances",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [{ internalType: "address", name: "_account", type: "address" }],
@@ -43,13 +57,6 @@ const abi = [
   {
     inputs: [],
     name: "rewardPerTokenStored",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "rewardRate",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -98,6 +105,6 @@ const abi = [
   },
 ];
 
-const staking = new Contract(address, abi, defaultProvider);
+const staking = new Contract(stakingAddress, abi, defaultProvider);
 
 export default staking;

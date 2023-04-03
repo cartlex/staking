@@ -5,6 +5,7 @@ const WithdrawWindow = ({
   setAmountToWithdraw,
   amountToWithdraw,
   isLoading,
+  stakedFunds
 }) => {
   return (
     <div>
@@ -21,11 +22,11 @@ const WithdrawWindow = ({
                 Matic token
               </h1>
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Earned:
+                Earned: ___
               </h1>
             </div>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Staked: 20.00
+              Staked: {stakedFunds}
             </h1>
           </div>
         </div>

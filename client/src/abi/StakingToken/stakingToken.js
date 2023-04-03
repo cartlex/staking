@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import defaultProvider from "../defaultProvider";
 
-const address = "0x2885CaDfAa67Bfa3A96961de436B1276A1d36701";
+const address = "0xedE2755842B471672a85A6282f8374FCc1C6956f";
 
 const abi = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },

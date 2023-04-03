@@ -1,30 +1,32 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import getStakingWithSigner from "../../abi/Staking/getStakingWithSigner";
+import { stakingAddress } from "../../abi/Staking/Staking";
 import getStakingTokenWithSigner from "../../abi/StakingToken/getStakingTokenWithSigner";
 import { AppContext } from "../../context";
 import StakeWindow from "./StakeWindow";
 import WithdrawWindow from "./WithdrawWindow";
 
 const Stake = () => {
-  const { address } = useContext(AppContext);
   const [variant, setVariant] = useState("stake");
   const [amountToStake, setAmountToStake] = useState();
   const [amountToWithdraw, setAmountToWithdraw] = useState();
-  const { isLoading, setIsLoading } = useContext(AppContext);
+  const [stakedFunds, setStakedFunds] = useState(null);
+  const { isLoading, setIsLoading, address } = useContext(AppContext);
 
   const handleStakeSubmit = async (e) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const stakingContract = await getStakingWithSigner();
       const stakingTokenContract = await getStakingTokenWithSigner();
       const txApprove = await stakingTokenContract.approve(
-        address,
+        stakingAddress,
         amountToStake
       );
       await txApprove.wait();
-      const stake = await stakingContract.stake(amountToStake);
-      await stake.wait();
+      const stakingContract = await getStakingWithSigner();
+      const stakeTx = await stakingContract.stake(amountToStake);
+      await stakeTx.wait();
+      console.log("success");
     } catch (error) {
       console.error(error);
     } finally {
@@ -33,6 +35,19 @@ const Stake = () => {
       setAmountToStake("");
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const stakingContract = await getStakingWithSigner();
+        const stakedFunds = await stakingContract._balances(address);
+        console.log(stakedFunds);
+        setStakedFunds(Number(stakedFunds));
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [stakedFunds]);
 
   const handleWithdrawSubmit = async (e) => {
     e.preventDefault();
@@ -85,6 +100,7 @@ const Stake = () => {
           handleWithdrawSubmit={handleWithdrawSubmit}
           setAmountToWithdraw={setAmountToWithdraw}
           amountToWithdraw={amountToWithdraw}
+          stakedFunds={stakedFunds}
         />
       )}
     </div>
