@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import walletProvider from "../abi/walletProvider";
 import { AppContext } from "../context";
@@ -19,6 +19,11 @@ const Navbar = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    handleWalletConnectClick();
+    localStorage.setItem("address", address)
+  }, [address]);
 
   return (
     <div className="flex justify-between h-[80px] items-center w-full fixed top-0">

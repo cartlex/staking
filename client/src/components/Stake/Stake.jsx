@@ -11,6 +11,10 @@ const Stake = () => {
   const [amountToStake, setAmountToStake] = useState();
   const [amountToWithdraw, setAmountToWithdraw] = useState();
   const [stakedFunds, setStakedFunds] = useState(null);
+  const [tokenName, setTokenName] = useState(null);
+  const [earnedFunds, setEarnedFunds] = useState(null);
+  const [getReward, setGetReward] = useState(null);
+  const [userBalance, setUserBalance] = useState(null);
   const { isLoading, setIsLoading, address } = useContext(AppContext);
 
   const handleStakeSubmit = async (e) => {
@@ -40,14 +44,24 @@ const Stake = () => {
     (async () => {
       try {
         const stakingContract = await getStakingWithSigner();
+        const stakingTokenContract = await getStakingTokenWithSigner();
+
         const stakedFunds = await stakingContract._balances(address);
-        console.log(stakedFunds);
         setStakedFunds(Number(stakedFunds));
+
+        const tokenName = await stakingTokenContract.name();
+        setTokenName(tokenName);
+
+        const earnedFunds = await stakingContract.earned(address);
+        setEarnedFunds(Number(earnedFunds));
+
+        const balance = await stakingTokenContract.balanceOf(address);
+        setUserBalance(Number(balance));
       } catch (error) {
         console.error(error);
       }
     })();
-  }, [stakedFunds]);
+  }, [stakedFunds, earnedFunds, tokenName, userBalance]);
 
   const handleWithdrawSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +70,22 @@ const Stake = () => {
       const stakingContract = await getStakingWithSigner();
       const withdraw = await stakingContract.withdraw(amountToWithdraw);
       await withdraw.wait();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+      setAmountToWithdraw("");
+      setAmountToStake("");
+    }
+  };
+
+  const handleGetRewardSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const stakingContract = await getStakingWithSigner();
+      const getRewardToUser = await stakingContract.getReward();
+      await getRewardToUser.wait();
+      setGetReward(Number(getRewardToUser));
     } catch (error) {
       console.error(error);
     } finally {
@@ -93,6 +123,8 @@ const Stake = () => {
           handleStakeSubmit={handleStakeSubmit}
           setAmountToStake={setAmountToStake}
           amountToStake={amountToStake}
+          userBalance={userBalance}
+          tokenName={tokenName}
         />
       ) : (
         <WithdrawWindow
@@ -101,6 +133,9 @@ const Stake = () => {
           setAmountToWithdraw={setAmountToWithdraw}
           amountToWithdraw={amountToWithdraw}
           stakedFunds={stakedFunds}
+          tokenName={tokenName}
+          earnedFunds={earnedFunds}
+          handleGetRewardSubmit={handleGetRewardSubmit}
         />
       )}
     </div>

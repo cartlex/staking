@@ -5,7 +5,10 @@ const WithdrawWindow = ({
   setAmountToWithdraw,
   amountToWithdraw,
   isLoading,
-  stakedFunds
+  stakedFunds,
+  tokenName,
+  earnedFunds,
+  handleGetRewardSubmit
 }) => {
   return (
     <div>
@@ -16,13 +19,10 @@ const WithdrawWindow = ({
           <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
             <div className="flex flex-col">
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Amount
+                Token: {tokenName}
               </h1>
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Matic token
-              </h1>
-              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Earned: ___
+                Earned: {earnedFunds}
               </h1>
             </div>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
@@ -33,7 +33,7 @@ const WithdrawWindow = ({
       )}
       <div className="flex justify-between items-center mt-[20px]"></div>
       <div className="flex items-center flex-col justify-center">
-        <form onSubmit={handleWithdrawSubmit}>
+        {!isLoading && <form onSubmit={handleWithdrawSubmit}>
           <label htmlFor="withdraw"></label>
           <input
             disabled={isLoading}
@@ -53,7 +53,13 @@ const WithdrawWindow = ({
           >
             Withdraw
           </button>
-        </form>
+        </form>}
+        {stakedFunds !== 0 && <button
+          disabled={isLoading} onClick={handleGetRewardSubmit}
+          className="flex items-center justify-center m-[10px] bg-cyan-500 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
+        >
+          Get reward
+        </button>}
       </div>
     </div>
   );

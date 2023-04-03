@@ -5,6 +5,8 @@ const StakeWindow = ({
   setAmountToStake,
   amountToStake,
   isLoading,
+  userBalance,
+  tokenName
 }) => {
   return (
     <div>
@@ -12,19 +14,22 @@ const StakeWindow = ({
         <Loader />
       ) : (
         <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px]">
-          <div className="flex flex-row justify-between px-[10px] w-full pt-[10px]">
+          <div className="flex flex-col justify-between px-[10px] w-full pt-[10px]">
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
               Amount
             </h1>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Balance: 100000.00
+                Token: {tokenName}
+              </h1>
+            <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+              Your Balance: {userBalance}
             </h1>
           </div>
         </div>
       )}
       <div className="flex justify-between items-center mt-[20px]"></div>
       <div className="flex items-center flex-col justify-center">
-        <form onSubmit={handleStakeSubmit}>
+       {!isLoading && <form onSubmit={handleStakeSubmit}>
           <label htmlFor="stake"></label>
           <input
             disabled={isLoading}
@@ -44,7 +49,7 @@ const StakeWindow = ({
           >
             Stake
           </button>
-        </form>
+        </form>}
       </div>
     </div>
   );
