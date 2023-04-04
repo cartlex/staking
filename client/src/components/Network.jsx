@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import defaultProvider from "../abi/defaultProvider";
 import walletProvider from "../abi/walletProvider";
 
 const Network = ({ networksToChoose }) => {
   const [toggleDrawer, setTogglerDrawer] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [network, setNetwork] = useState([]);
+  const [network, setNetwork] = useState({});
 
   const handleNetworkClick = (networkToChoose) => {
     setNetwork(networkToChoose);
@@ -15,6 +14,7 @@ const Network = ({ networksToChoose }) => {
 
   const changeNetwork = async (networkId) => {
     try {
+      console.log(networkId);
       await walletProvider.send("wallet_switchEthereumChain", [
         { chainId: networkId.chainId },
       ]);

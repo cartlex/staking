@@ -14,7 +14,7 @@ const Stake = () => {
   const [tokenName, setTokenName] = useState(null);
   const [earnedFunds, setEarnedFunds] = useState(null);
   const [getReward, setGetReward] = useState(null);
-  const [userBalance, setUserBalance] = useState(null);
+  const [userBalance, setUserBalance] = useState(0);
   const { isLoading, setIsLoading, address } = useContext(AppContext);
 
   const handleStakeSubmit = async (e) => {

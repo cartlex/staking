@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom";
 import { github, telegram, discord } from "../assets";
+import { stakingAddress } from "../abi/Staking/Staking";
 
 const Footer = () => {
   return (
-    <div className="flex justify-end items-center bg-slate-800 h-[65px] w-full fixed bottom-0 ">
+    <div className="flex justify-between items-center bg-slate-800 h-[65px] w-full fixed bottom-0 ">
+      <div className="flex flex-row space-x-[20px]">
+        <h1 className="ml-[30px] text-zinc-300">All rights reserved (c)</h1>
+        <Link
+          target="_blank"
+          to="https://sepolia.etherscan.io/address/0x8F3A64D4cB8FEf31c57b27427F8FE922965F55A4#code"
+          className="flex justify-center items-center"
+        >
+          <h1 className="ml-[30px] text-zinc-300">
+            Etherscan: {stakingAddress}
+          </h1>
+        </Link>
+      </div>
+
       <div className="flex flex-row mr-[30px] space-x-[15px]">
         <Link
           target="_blank"

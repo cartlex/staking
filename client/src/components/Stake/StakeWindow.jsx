@@ -16,9 +16,6 @@ const StakeWindow = ({
         <div className="flex justify-center items-start bg-black opacity-50 w-[400px] h-[150px] rounded-[10px]">
           <div className="flex flex-col justify-between px-[10px] w-full pt-[10px]">
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Amount
-            </h1>
-            <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
                 Token: {tokenName}
               </h1>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">

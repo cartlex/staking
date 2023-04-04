@@ -3,7 +3,9 @@ import polygonMatic from "./polygonMatic.svg";
 import optimism from "./optimism.svg";
 import github from "./github.svg";
 import telegram from "./telegram.svg";
-import discord from "./discord.svg"
+import discord from "./discord.svg";
+import networks from "./networks.svg";
+
 
 export {
     eth,
@@ -11,5 +13,6 @@ export {
     optimism,
     discord,
     github,
-    telegram
+    telegram,
+    networks
 };

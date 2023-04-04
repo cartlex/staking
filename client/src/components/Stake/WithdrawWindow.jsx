@@ -54,7 +54,7 @@ const WithdrawWindow = ({
             Withdraw
           </button>
         </form>}
-        {stakedFunds !== 0 && <button
+        {earnedFunds !== 0 && <button
           disabled={isLoading} onClick={handleGetRewardSubmit}
           className="flex items-center justify-center m-[10px] bg-cyan-500 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
         >
