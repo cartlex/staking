@@ -1,11 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity^0.8.0;
+pragma solidity^0.8.17;
 
 import "./ERC20.sol";
 
-/// @title RewardingToken contract
+/// @title Rewarding token contract
 /// @author cartlex
 
 contract RewardingToken is ERC20 {
-    constructor() ERC20("Rewarding", "RW") {}
+    uint constant public TOKEN_SUPPLY = 3 * 1e28;
+
+    constructor() ERC20("RewardingToken", "RW") {
+        _mint(msg.sender, TOKEN_SUPPLY);
+    }
 }
