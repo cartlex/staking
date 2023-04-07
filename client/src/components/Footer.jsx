@@ -9,7 +9,7 @@ const Footer = () => {
         <h1 className="ml-[30px] text-zinc-300">All rights reserved (c)</h1>
         <Link
           target="_blank"
-          to="https://sepolia.etherscan.io/address/0x8F3A64D4cB8FEf31c57b27427F8FE922965F55A4#code"
+          to="https://sepolia.etherscan.io/address/0xC5f9701e6EEA392A8457d140Ce385B9866617372#code"
           className="flex justify-center items-center"
         >
           <h1 className="ml-[30px] text-zinc-300">

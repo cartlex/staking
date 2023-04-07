@@ -1,9 +1,8 @@
-import { parseEther } from "ethers";
+import { formatEther } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import getStakingWithSigner from "../../abi/Staking/getStakingWithSigner";
 import { stakingAddress } from "../../abi/Staking/Staking";
 import getStakingTokenWithSigner from "../../abi/StakingToken/getStakingTokenWithSigner";
-import stakingToken from "../../abi/StakingToken/stakingToken";
 import { AppContext } from "../../context";
 import StakeWindow from "./StakeWindow";
 import WithdrawWindow from "./WithdrawWindow";
@@ -18,6 +17,10 @@ const Stake = () => {
   const [getReward, setGetReward] = useState(null);
   const [userBalance, setUserBalance] = useState(0);
   const { isLoading, setIsLoading, address } = useContext(AppContext);
+  const [allowanceAmount, setAllowanceAmount] = useState(null);
+  const [amountAPR, setAmountAPR] = useState(null);
+  const [timeToLock, setTimeToLock] = useState(null);
+  const [rewardsPaidToUser, setRewardsPaidToUser] = useState(null);
 
   const handleStakeSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +29,8 @@ const Stake = () => {
       const stakingTokenContract = await getStakingTokenWithSigner();
       const stakingContract = await getStakingWithSigner();
       const allowance = await stakingTokenContract.allowance(address, stakingAddress);
+      setAllowanceAmount(Number(allowance));
+      console.log(allowance);
       if (allowance >= amountToStake) {
         const stakeTx = await stakingContract.stake(amountToStake);
         await stakeTx.wait();
@@ -56,17 +61,23 @@ const Stake = () => {
         const stakingContract = await getStakingWithSigner();
         const stakingTokenContract = await getStakingTokenWithSigner();
 
-        const stakedFunds = await stakingContract._balances(address);
-        setStakedFunds(Number(stakedFunds));
+        const stakedFunds = await stakingContract.balances(address);
+        setStakedFunds(Number(formatEther(stakedFunds)));
 
         const tokenName = await stakingTokenContract.name();
         setTokenName(tokenName);
 
-        const earnedFunds = await stakingContract.earned(address);
-        setEarnedFunds(Number(earnedFunds));
+        const APR = await stakingContract.APR();
+        setAmountAPR(Number(APR));
+
+        const periodToLock = await stakingContract.lockPeriod();
+        setTimeToLock(Number(periodToLock));
+        
+        const reward = await stakingContract.rewardsPaid(address);
+        setRewardsPaidToUser(Number(formatEther(reward)));
 
         const balance = await stakingTokenContract.balanceOf(address);
-        setUserBalance(Number(balance));
+        setUserBalance(Number(formatEther(balance)));
       } catch (error) {
         console.error(error);
       }
@@ -78,8 +89,10 @@ const Stake = () => {
     try {
       setIsLoading(true);
       const stakingContract = await getStakingWithSigner();
-      const withdraw = await stakingContract.withdraw(amountToWithdraw);
-      await withdraw.wait();
+      const unstakeTx = await stakingContract.unstake(amountToWithdraw);
+      // parseEther("");
+      // передеплоить stakingapp, убрать amount из unstake
+      await unstakeTx.wait();
     } catch (error) {
       console.error(error);
     } finally {
@@ -144,7 +157,9 @@ const Stake = () => {
           amountToWithdraw={amountToWithdraw}
           stakedFunds={stakedFunds}
           tokenName={tokenName}
-          earnedFunds={earnedFunds}
+          rewardsPaidToUser={rewardsPaidToUser}
+          amountAPR={amountAPR}
+          timeToLock={timeToLock}
           handleGetRewardSubmit={handleGetRewardSubmit}
         />
       )}

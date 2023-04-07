@@ -7,7 +7,9 @@ const WithdrawWindow = ({
   isLoading,
   stakedFunds,
   tokenName,
-  earnedFunds,
+  rewardsPaidToUser,
+  amountAPR,
+  timeToLock,
   handleGetRewardSubmit
 }) => {
   return (
@@ -22,12 +24,19 @@ const WithdrawWindow = ({
                 Token: {tokenName}
               </h1>
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Earned: {earnedFunds}
+                Earned: {rewardsPaidToUser}
+              </h1>
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                APR: {amountAPR}%
+              </h1>
+              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+                Lock Period: {timeToLock}
               </h1>
             </div>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Staked: {stakedFunds}
+              Staked: {stakedFunds} {tokenName}
             </h1>
+            
           </div>
         </div>
       )}
@@ -51,10 +60,10 @@ const WithdrawWindow = ({
             disabled={isLoading}
             className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
           >
-            Withdraw
+            Unstake
           </button>
         </form>}
-        {earnedFunds !== 0 && <button
+        {rewardsPaidToUser !== 0 && <button
           disabled={isLoading} onClick={handleGetRewardSubmit}
           className="flex items-center justify-center m-[10px] bg-cyan-500 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
         >
