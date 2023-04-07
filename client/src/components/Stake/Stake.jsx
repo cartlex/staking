@@ -1,7 +1,9 @@
+import { parseEther } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import getStakingWithSigner from "../../abi/Staking/getStakingWithSigner";
 import { stakingAddress } from "../../abi/Staking/Staking";
 import getStakingTokenWithSigner from "../../abi/StakingToken/getStakingTokenWithSigner";
+import stakingToken from "../../abi/StakingToken/stakingToken";
 import { AppContext } from "../../context";
 import StakeWindow from "./StakeWindow";
 import WithdrawWindow from "./WithdrawWindow";
@@ -22,14 +24,21 @@ const Stake = () => {
     try {
       setIsLoading(true);
       const stakingTokenContract = await getStakingTokenWithSigner();
-      const txApprove = await stakingTokenContract.approve(
-        stakingAddress,
-        amountToStake
-      );
-      await txApprove.wait();
       const stakingContract = await getStakingWithSigner();
-      const stakeTx = await stakingContract.stake(amountToStake);
-      await stakeTx.wait();
+      const allowance = await stakingTokenContract.allowance(address, stakingAddress);
+      if (allowance >= amountToStake) {
+        const stakeTx = await stakingContract.stake(amountToStake);
+        await stakeTx.wait();
+      } else {
+        const txApprove = await stakingTokenContract.approve(
+          stakingAddress,
+          amountToStake
+        );
+        await txApprove.wait();
+        const stakeTx = await stakingContract.stake(amountToStake);
+        await stakeTx.wait();
+      }
+
       console.log("success");
     } catch (error) {
       console.error(error);
@@ -37,6 +46,7 @@ const Stake = () => {
       setIsLoading(false);
       setAmountToWithdraw("");
       setAmountToStake("");
+      console.log(amountToStake);
     }
   };
 

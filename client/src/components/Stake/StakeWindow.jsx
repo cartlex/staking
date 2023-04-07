@@ -1,3 +1,4 @@
+import { formatEther, formatUnits, parseEther } from "ethers";
 import Loader from "../UI/Loader";
 
 const StakeWindow = ({

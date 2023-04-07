@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import defaultProvider from "../defaultProvider";
 
-const address = "0x8F58c2eA6E71Ca298230A86e7b62c114b4146953";
+const address = "0xD102d6f8ee2B19FEB5ff65D56cDb1Fda71f9D39B";
 
 const abi = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
@@ -44,6 +44,13 @@ const abi = [
     ],
     name: "Transfer",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "TOKEN_SUPPLY",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [{ internalType: "address", name: "", type: "address" }],
