@@ -7,7 +7,7 @@ import "./ERC20.sol";
 /// @author cartlex
 
 contract RewardingToken is ERC20 {
-    uint constant public TOKEN_SUPPLY = 3 * 1e28;
+    uint constant public TOKEN_SUPPLY = 3 * 10 ** 28;
 
     constructor() ERC20("RewardingToken", "RW") {
         _mint(msg.sender, TOKEN_SUPPLY);

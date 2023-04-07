@@ -7,7 +7,7 @@ import "./ERC20.sol";
 /// @author cartlex
 
 contract StakingToken is ERC20 {
-    uint constant public supply = 1e18;
+    uint constant public supply = 2 * 10 ** 18;
 
     constructor() ERC20("StakingToken", "ST") {
         _mint(msg.sender, supply);
