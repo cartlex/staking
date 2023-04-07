@@ -1,11 +1,11 @@
 import { ethers } from "hardhat";
 
 const main = async () => {
-  const StakingToken = "0xedE2755842B471672a85A6282f8374FCc1C6956f";
-  const RewardingToken = "0x8F58c2eA6E71Ca298230A86e7b62c114b4146953";
+  const StakingToken = "0x093f91Db1f0F08A892D91f442a6879CEdE5AD1db";
+  const RewardingToken = "0xD102d6f8ee2B19FEB5ff65D56cDb1Fda71f9D39B";
 
   const [deployer] = await ethers.getSigners();
-  const Factory = await ethers.getContractFactory("Staking");
+  const Factory = await ethers.getContractFactory("StakingApp");
   const staking = await Factory.deploy(StakingToken, RewardingToken);
   await staking.deployed();
 

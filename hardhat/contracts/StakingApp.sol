@@ -82,10 +82,11 @@ contract StakingApp {
     }
 
     function unstake(uint _amount) unlocked external {
-        if(_amount > balances[msg.sender]) revert NotEnough();
+        if(_amount == balances[msg.sender]) revert NotEnough();
         totalStakedTokenAmount -= _amount;
         balances[msg.sender] -= _amount;
         Stakers[msg.sender].amount -= _amount;
+        Stakers[msg.sender].staked = false;
         ST.transfer(msg.sender, _amount);
 
         emit Withdrawn(msg.sender, _amount);

@@ -299,7 +299,7 @@ describe("StakingApp", function () {
     });
   });
 
-  describe("withdraw()", async () => {
+  describe("unstake()", async () => {
     it("allow to withdraw tokens to user", async () => {
       const { stakingToken } = await loadFixture(deployStakingToken);
       const { rewardingToken } = await loadFixture(deployRewardingToken);
@@ -329,6 +329,7 @@ describe("StakingApp", function () {
 
       const staker = await stakingApp.Stakers(stakingAppDeployer.address);
       expect(staker.amount).to.eq(amountToUnstake);
+      expect(staker.staked).to.eq(false);
       expect(await stakingApp.balances(stakingAppDeployer.address)).to.eq(
         amountToUnstake
       );
