@@ -92,13 +92,13 @@ describe("StakingApp", function () {
     });
 
     it("should revert if rewarding token is zero address", async () => {
-        const rewardingToken = ethers.constants.AddressZero;
-        const [stakingAppDeployer] = await ethers.getSigners();
-        const Factory = await ethers.getContractFactory("StakingApp");
-        await expect(
-          Factory.deploy(stakingToken.address, rewardingToken)
-        ).to.be.revertedWithCustomError(stakingApp, "ZeroAddress");
-      });
+      const rewardingToken = ethers.constants.AddressZero;
+      const [stakingAppDeployer] = await ethers.getSigners();
+      const Factory = await ethers.getContractFactory("StakingApp");
+      await expect(
+        Factory.deploy(stakingToken.address, rewardingToken)
+      ).to.be.revertedWithCustomError(stakingApp, "ZeroAddress");
+    });
   });
 
   describe("stake()", async () => {
@@ -300,14 +300,12 @@ describe("StakingApp", function () {
   });
 
   describe("unstake()", async () => {
-    it("allow to withdraw tokens to user", async () => {
+    it("allow user unstake", async () => {
       const { stakingToken } = await loadFixture(deployStakingToken);
       const { rewardingToken } = await loadFixture(deployRewardingToken);
       const { stakingApp, stakingAppDeployer } = await loadFixture(
         deployStakingApp
       );
-
-      let amountToUnstake = ethers.utils.parseEther("0.5");
 
       const transferRWtoStakingContractTx = await rewardingToken.transfer(
         stakingApp.address,
@@ -320,29 +318,42 @@ describe("StakingApp", function () {
         MINIMUM_STAKE
       );
       await approveTx.wait();
-      // добавить отдельную переменную с разницей между стейком и анстейком
       const stakeTx = await stakingApp.stake(MINIMUM_STAKE);
       await stakeTx.wait();
       await ethers.provider.send("evm_increaseTime", [60]);
-      const unstakeTx = await stakingApp.unstake(amountToUnstake);
+
+      const Staker = await stakingApp.Stakers(stakingAppDeployer.address);
+      const amount = Staker.amount;
+      const reward =
+        Math.trunc((Number(amount) * APR) / 100 / SECOND_IN_ONE_YEAR) *
+        lockPeriod;
+
+      const unstakeTx = await stakingApp.unstake();
       await unstakeTx.wait();
 
       const staker = await stakingApp.Stakers(stakingAppDeployer.address);
-      expect(staker.amount).to.eq(amountToUnstake);
+      expect(staker.amount).to.eq(0);
       expect(staker.staked).to.eq(false);
-      expect(await stakingApp.balances(stakingAppDeployer.address)).to.eq(
-        amountToUnstake
-      );
-      expect(await stakingApp.totalStakedTokenAmount()).to.eq(amountToUnstake);
+      expect(staker.startTimestamp).to.eq(0);
+      expect(staker.endTimestamp).to.eq(0);
+      expect(staker.sender).to.eq(ethers.constants.AddressZero);
+
+      expect(await stakingApp.balances(stakingAppDeployer.address)).to.eq(0);
       await expect(unstakeTx).to.changeTokenBalance(
         stakingToken,
         stakingAppDeployer.address,
-        amountToUnstake
+        MINIMUM_STAKE
+      );
+
+      await expect(unstakeTx).to.changeTokenBalance(
+        rewardingToken,
+        stakingAppDeployer.address,
+        reward
       );
 
       await expect(unstakeTx)
-        .to.emit(stakingApp, "Withdrawn")
-        .withArgs(stakingAppDeployer.address, amountToUnstake);
+        .to.emit(stakingApp, "Unstake")
+        .withArgs(stakingAppDeployer.address, MINIMUM_STAKE);
     });
   });
 });

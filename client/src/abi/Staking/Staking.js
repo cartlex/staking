@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import defaultProvider from "../defaultProvider";
 
-export const stakingAddress = "0xC5f9701e6EEA392A8457d140Ce385B9866617372";
+export const stakingAddress = "0x0610F3B693955adb02c60aE22709Df528799D666";
 
 const abi = [
   {
@@ -71,7 +71,7 @@ const abi = [
         type: "uint256",
       },
     ],
-    name: "Withdrawn",
+    name: "Unstake",
     type: "event",
   },
   {
@@ -183,7 +183,7 @@ const abi = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+    inputs: [],
     name: "unstake",
     outputs: [],
     stateMutability: "nonpayable",

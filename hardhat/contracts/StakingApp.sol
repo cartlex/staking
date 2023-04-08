@@ -36,7 +36,7 @@ contract StakingApp {
     mapping(address => Staker) public Stakers;
 
     event Staked(address indexed sender, uint indexed amount);
-    event Withdrawn(address indexed sender, uint indexed amount);
+    event Unstake(address indexed sender, uint indexed amount);
     event EtherReceived(address indexed sender, uint indexed amount);
 
     modifier unlocked() {
@@ -81,15 +81,15 @@ contract StakingApp {
         emit Staked(msg.sender, _amount);
     }
 
-    function unstake(uint _amount) unlocked external {
-        if(_amount == balances[msg.sender]) revert NotEnough();
-        totalStakedTokenAmount -= _amount;
-        balances[msg.sender] -= _amount;
-        Stakers[msg.sender].amount -= _amount;
-        Stakers[msg.sender].staked = false;
-        ST.transfer(msg.sender, _amount);
+    function unstake() unlocked external {
+        uint amount = balances[msg.sender];
+        uint reward = _getRewardAmount();
+        delete balances[msg.sender];
+        delete Stakers[msg.sender];
+        ST.transfer(msg.sender, amount);
+        RW.transfer(msg.sender, reward);
 
-        emit Withdrawn(msg.sender, _amount);
+        emit Unstake(msg.sender, amount);
     }
 
     function getReward() external unlocked {

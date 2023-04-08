@@ -1,16 +1,15 @@
+import { formatEther } from "ethers";
 import Loader from "../UI/Loader";
 
-const WithdrawWindow = ({
-  handleWithdrawSubmit,
-  setAmountToWithdraw,
-  amountToWithdraw,
+const UnstakeWindow = ({
+  handleUnstakeSubmit,
   isLoading,
   stakedFunds,
   tokenName,
   rewardsPaidToUser,
   amountAPR,
   timeToLock,
-  handleGetRewardSubmit
+  handleGetRewardSubmit,
 }) => {
   return (
     <div>
@@ -23,9 +22,9 @@ const WithdrawWindow = ({
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
                 Token: {tokenName}
               </h1>
-              <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
+              {rewardsPaidToUser !== 0 && <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
                 Earned: {rewardsPaidToUser}
-              </h1>
+              </h1>}
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
                 APR: {amountAPR}%
               </h1>
@@ -34,44 +33,34 @@ const WithdrawWindow = ({
               </h1>
             </div>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-              Staked: {stakedFunds} {tokenName}
+              Staked: {stakedFunds}
             </h1>
-            
           </div>
         </div>
       )}
       <div className="flex justify-between items-center mt-[20px]"></div>
       <div className="flex items-center flex-col justify-center">
-        {!isLoading && <form onSubmit={handleWithdrawSubmit}>
-          <label htmlFor="withdraw"></label>
-          <input
-            disabled={isLoading}
-            onChange={(e) => setAmountToWithdraw(e.target.value)}
-            required
-            value={amountToWithdraw}
-            type="number"
-            min={1}
-            step={1}
-            id="withdraw"
-            className="w-[300px] text-center rounded-[10px] h-[40px] bg-slate-700 bg-opacity-30  outline-none m-[10px] text-zinc-300 hover:border-[1px] hover:border-blue-300 hover:placeholder:text-slate-200 hover:bg-opacity-50 disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
-            placeholder="Amount to withdraw"
-          />
-          <button
-            disabled={isLoading}
-            className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
-          >
-            Unstake
-          </button>
-        </form>}
-        {rewardsPaidToUser !== 0 && <button
-          disabled={isLoading} onClick={handleGetRewardSubmit}
+        {!isLoading && (
+          <form onSubmit={handleUnstakeSubmit}>
+            <button
+              disabled={isLoading}
+              className="flex items-center justify-center m-[10px] bg-cyan-600 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
+            >
+              Unstake
+            </button>
+          </form>
+        )}
+
+        <button
+          disabled={isLoading}
+          onClick={handleGetRewardSubmit}
           className="flex items-center justify-center m-[10px] bg-cyan-500 rounded-[10px] w-[300px] h-[45px] text-gray-200 hover:bg-cyan-500 text-[14px] hover:border-[1px] hover:border-cyan-400 hover:text-white disabled:bg-black disabled:bg-opacity-50 disabled:border-none"
         >
           Get reward
-        </button>}
+        </button>
       </div>
     </div>
   );
 };
 
-export default WithdrawWindow;
+export default UnstakeWindow;

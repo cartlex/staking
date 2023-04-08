@@ -5,15 +5,13 @@ import { stakingAddress } from "../../abi/Staking/Staking";
 import getStakingTokenWithSigner from "../../abi/StakingToken/getStakingTokenWithSigner";
 import { AppContext } from "../../context";
 import StakeWindow from "./StakeWindow";
-import WithdrawWindow from "./WithdrawWindow";
+import UnstakeWindow from "./UnstakeWindow";
 
 const Stake = () => {
   const [variant, setVariant] = useState("stake");
   const [amountToStake, setAmountToStake] = useState();
-  const [amountToWithdraw, setAmountToWithdraw] = useState();
   const [stakedFunds, setStakedFunds] = useState(null);
   const [tokenName, setTokenName] = useState(null);
-  const [earnedFunds, setEarnedFunds] = useState(null);
   const [getReward, setGetReward] = useState(null);
   const [userBalance, setUserBalance] = useState(0);
   const { isLoading, setIsLoading, address } = useContext(AppContext);
@@ -28,10 +26,14 @@ const Stake = () => {
       setIsLoading(true);
       const stakingTokenContract = await getStakingTokenWithSigner();
       const stakingContract = await getStakingWithSigner();
-      const allowance = await stakingTokenContract.allowance(address, stakingAddress);
-      setAllowanceAmount(Number(allowance));
-      console.log(allowance);
-      if (allowance >= amountToStake) {
+      const allowanceTx = await stakingTokenContract.allowance(
+        address,
+        stakingAddress
+      );
+    //   await allowanceTx.wait();
+      setAllowanceAmount(Number(allowanceTx));
+      console.log(allowanceAmount);
+      if (allowanceAmount >= amountToStake) {
         const stakeTx = await stakingContract.stake(amountToStake);
         await stakeTx.wait();
       } else {
@@ -43,15 +45,11 @@ const Stake = () => {
         const stakeTx = await stakingContract.stake(amountToStake);
         await stakeTx.wait();
       }
-
-      console.log("success");
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
-      setAmountToWithdraw("");
       setAmountToStake("");
-      console.log(amountToStake);
     }
   };
 
@@ -72,7 +70,7 @@ const Stake = () => {
 
         const periodToLock = await stakingContract.lockPeriod();
         setTimeToLock(Number(periodToLock));
-        
+
         const reward = await stakingContract.rewardsPaid(address);
         setRewardsPaidToUser(Number(formatEther(reward)));
 
@@ -82,22 +80,19 @@ const Stake = () => {
         console.error(error);
       }
     })();
-  }, [stakedFunds, earnedFunds, tokenName, userBalance]);
+  }, [stakedFunds, tokenName, userBalance, rewardsPaidToUser]);
 
-  const handleWithdrawSubmit = async (e) => {
+  const handleUnstakeSubmit = async (e) => {
     e.preventDefault();
     try {
       setIsLoading(true);
       const stakingContract = await getStakingWithSigner();
-      const unstakeTx = await stakingContract.unstake(amountToWithdraw);
-      // parseEther("");
-      // передеплоить stakingapp, убрать amount из unstake
+      const unstakeTx = await stakingContract.unstake();
       await unstakeTx.wait();
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
-      setAmountToWithdraw("");
       setAmountToStake("");
     }
   };
@@ -113,7 +108,6 @@ const Stake = () => {
       console.error(error);
     } finally {
       setIsLoading(false);
-      setAmountToWithdraw("");
       setAmountToStake("");
     }
   };
@@ -150,11 +144,9 @@ const Stake = () => {
           tokenName={tokenName}
         />
       ) : (
-        <WithdrawWindow
+        <UnstakeWindow
           isLoading={isLoading}
-          handleWithdrawSubmit={handleWithdrawSubmit}
-          setAmountToWithdraw={setAmountToWithdraw}
-          amountToWithdraw={amountToWithdraw}
+          handleUnstakeSubmit={handleUnstakeSubmit}
           stakedFunds={stakedFunds}
           tokenName={tokenName}
           rewardsPaidToUser={rewardsPaidToUser}
