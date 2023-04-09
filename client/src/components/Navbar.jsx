@@ -23,7 +23,7 @@ const Navbar = () => {
   useEffect(() => {
     handleWalletConnectClick();
     localStorage.setItem("address", address)
-  }, [address]);
+  });
 
   return (
     <div className="flex justify-between h-[80px] items-center w-full fixed top-0">

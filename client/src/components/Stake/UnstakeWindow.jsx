@@ -29,7 +29,7 @@ const UnstakeWindow = ({
                 APR: {amountAPR}%
               </h1>
               <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">
-                Lock Period: {timeToLock}
+                Lock Period: {timeToLock} seconds
               </h1>
             </div>
             <h1 className="text-zinc-300  hover:placeholder:text-slate-200 hover:text-white">

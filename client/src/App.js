@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import { AppContext } from "./context";
+import { networksToChoose } from "./utils/Networks/networksToChoose";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +10,7 @@ const App = () => {
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState();
   const [balance, setBalance] = useState(0);
-  const [network, setNetwork] = useState([]);
+  const [network, setNetwork] = useState(networksToChoose[1]);
 
   return (
     <AppContext.Provider 
@@ -19,13 +20,13 @@ const App = () => {
         modal,
         setModal,
         address,
-        amount,
         setAddress,
+        amount,
         setAmount,
         balance,
         setBalance,
         network,
-        setNetwork
+        setNetwork,
       }}
     >
       <BrowserRouter>

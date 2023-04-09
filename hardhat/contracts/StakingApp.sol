@@ -86,6 +86,7 @@ contract StakingApp {
         uint reward = _getRewardAmount();
         delete balances[msg.sender];
         delete Stakers[msg.sender];
+        delete rewardsPaid[msg.sender];
         ST.transfer(msg.sender, amount);
         RW.transfer(msg.sender, reward);
 

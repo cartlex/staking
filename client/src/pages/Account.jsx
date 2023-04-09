@@ -7,16 +7,14 @@ import Navbar from "../components/Navbar";
 import { AppContext } from "../context";
 
 const Account = () => {
-  const { address, balance, setBalance, network, setNetwork } =
-    useContext(AppContext);
+  const { address, balance, setBalance, network } = useContext(AppContext);
 
   useEffect(() => {
     (async () => {
-      const balance = await walletProvider.getBalance(address);
-      setBalance(Number(formatEther(balance)).toFixed(2));
+      const walletBalance = await walletProvider.getBalance(address);
+      setBalance(Number(formatEther(walletBalance)).toFixed(4));
     })();
   }, [balance, address, network]);
-
   return (
     <>
       <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500 font-oswald">
@@ -52,7 +50,7 @@ const Account = () => {
           </div>
         </div>
         <Link to="/staking">
-          <button className="fixed left-[200px] top-[600px] flex justify-center items-center text-white bg-black hover:bg-slate-300 hover:text-black w-[150px] h-[40px] rounded-[10px]">
+          <button className="fixed left-[200px] top-[600px] flex justify-center items-center text-zinc-300 hover:text-white bg-cyan-600 hover:bg-cyan-500 w-[150px] h-[40px] rounded-[10px]">
             Start staking {">"}
           </button>
         </Link>

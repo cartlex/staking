@@ -10,9 +10,9 @@ const Footer = () => {
         <Link
           target="_blank"
           to="https://sepolia.etherscan.io/address/0x0610F3B693955adb02c60aE22709Df528799D666#code"
-          className="flex justify-center items-center"
+          className="flex justify-center items-center "
         >
-          <h1 className="ml-[30px] text-zinc-300">
+          <h1 className="ml-[30px] text-zinc-300 hover:text-white">
             Etherscan: {stakingAddress}
           </h1>
         </Link>
@@ -31,14 +31,14 @@ const Footer = () => {
         </Link>
         <Link
           target="_blank"
-          to="https://telegram.com/cartlex"
+          to="https://t.me/cartlex"
           className="flex justify-center items-center"
         >
           <img src={telegram} className="w-[35px] h-[35px]" />
         </Link>
         <Link
           target="_blank"
-          to="t.me/cartlex"
+          to="https://discord.com/invite/kkTdN2s9"
           className="flex justify-center items-center"
         >
           <img src={discord} className="w-[35px] h-[35px]" />

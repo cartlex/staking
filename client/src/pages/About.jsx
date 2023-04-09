@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -18,7 +17,7 @@ const Start = () => {
           </h1>
         </div>
         <Link to="/staking">
-          <button className="fixed left-[100px] top-[630px] flex justify-center items-center text-white bg-black hover:bg-slate-300 hover:text-black w-[150px] h-[40px] rounded-[10px]">
+          <button className="fixed left-[100px] top-[630px] flex justify-center items-center text-zinc-300 hover:text-white bg-cyan-600 hover:bg-cyan-500 w-[150px] h-[40px] rounded-[10px]">
             Learn more {'>'}
           </button>
         </Link>

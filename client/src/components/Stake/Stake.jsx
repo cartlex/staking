@@ -1,4 +1,4 @@
-import { formatEther } from "ethers";
+import { formatEther, parseEther } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import getStakingWithSigner from "../../abi/Staking/getStakingWithSigner";
 import { stakingAddress } from "../../abi/Staking/Staking";
@@ -9,7 +9,7 @@ import UnstakeWindow from "./UnstakeWindow";
 
 const Stake = () => {
   const [variant, setVariant] = useState("stake");
-  const [amountToStake, setAmountToStake] = useState();
+  const [amountToStake, setAmountToStake] = useState(null);
   const [stakedFunds, setStakedFunds] = useState(null);
   const [tokenName, setTokenName] = useState(null);
   const [getReward, setGetReward] = useState(null);
@@ -30,12 +30,13 @@ const Stake = () => {
         address,
         stakingAddress
       );
-    //   await allowanceTx.wait();
-      setAllowanceAmount(Number(allowanceTx));
-      console.log(allowanceAmount);
+      //   await allowanceTx.wait();
+      setAllowanceAmount(allowanceTx);
       if (allowanceAmount >= amountToStake) {
         const stakeTx = await stakingContract.stake(amountToStake);
+
         await stakeTx.wait();
+        console.log(stakeTx);
       } else {
         const txApprove = await stakingTokenContract.approve(
           stakingAddress,
