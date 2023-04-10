@@ -15,7 +15,5 @@ export const changeNetwork = async (networkName) => {
         console.log("add chain to metamask");
       }
     }
-
-    console.error(error);
   }
 };

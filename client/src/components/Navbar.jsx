@@ -14,6 +14,7 @@ const Navbar = () => {
     try {
       const account = await walletProvider.send("eth_requestAccounts", []);
       setAddress(account[0]);
+
       return account[0];
     } catch (error) {
       console.error(error);
@@ -22,7 +23,6 @@ const Navbar = () => {
 
   useEffect(() => {
     handleWalletConnectClick();
-    localStorage.setItem("address", address)
   });
 
   return (

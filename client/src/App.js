@@ -9,7 +9,7 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState();
-  const [balance, setBalance] = useState(0);
+//   const [balance, setBalance] = useState();
   const [network, setNetwork] = useState(networksToChoose[1]);
 
   return (
@@ -23,8 +23,8 @@ const App = () => {
         setAddress,
         amount,
         setAmount,
-        balance,
-        setBalance,
+        // balance,
+        // setBalance,
         network,
         setNetwork,
       }}

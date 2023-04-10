@@ -1,20 +1,52 @@
 import { formatEther } from "ethers";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import defaultProvider from "../abi/defaultProvider";
 import walletProvider from "../abi/walletProvider";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AppContext } from "../context";
+import { ethers } from "ethers";
 
 const Account = () => {
-  const { address, balance, setBalance, network } = useContext(AppContext);
-
-  useEffect(() => {
-    (async () => {
+  const { address, network } = useContext(AppContext);
+  const [balance, setBalance] = useState();
+console.log(balance);
+    const getBalance = async () => {
       const walletBalance = await walletProvider.getBalance(address);
-      setBalance(Number(formatEther(walletBalance)).toFixed(4));
-    })();
-  }, [balance, address, network]);
+      // console.log(walletBalance);
+      return Number(formatEther(walletBalance)).toFixed(4);
+    };
+
+//   useEffect(() => {
+//     async () => {
+//       try {
+//         // console.log(await walletProvider.getBalance(address))
+//         const walletBalance = await defaultProvider.getBalance(address);
+//         return Number(formatEther(walletBalance)).toFixed(4);
+
+//         // return walletBalance
+//         // getBalance();
+//         // setBalance(Number(formatEther(walletBalance)).toFixed(4));
+//         console.log(bal);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+//   }, [address, balance]);
+
+    useEffect(() => {
+      (async () => {
+        try {
+          // setBalance(Number(formatEther(walletBalance)).toFixed(4));
+          const bal = await getBalance();
+          setBalance(bal);
+          address && bal
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    }, [address]);
   return (
     <>
       <div className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-teal-300 to-sky-500 font-oswald">

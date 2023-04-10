@@ -6,32 +6,33 @@ import { changeNetwork } from "../utils/Networks/changeNetwork";
 const Network = ({ networksToChoose }) => {
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [isActive, setIsActive] = useState(false);
-    // const [network, setNetwork] = useState({});
+  // const [address, setAddress] = useState();
   const { network, setNetwork } = useContext(AppContext);
 
   const handleNetworkClick = (networkToChoose) => {
     changeNetwork(networkToChoose);
-    setNetwork(networkToChoose);
     setIsActive(networkToChoose.chainName);
-  };
-//   const changeNetwork = async (networkToChoose) => {
-//     try {
-//       await walletProvider.send("wallet_switchEthereumChain", [
-//         { chainId: networkToChoose.chainId },
-//       ]);
+    setNetwork(networkToChoose);
 
-//     } catch (switchError) {
-//       if (switchError.code === -32602) {
-//         try {
-//           await walletProvider.send("wallet_addEthereumChain", [
-//             { chainId: networkToChoose.chainId },
-//           ]);
-//         } catch (addError) {
-//           console.log("add chain to metamask");
-//         }
-//       }
-//     }
-//   };
+  };
+  //   const changeNetwork = async (networkToChoose) => {
+  //     try {
+  //       await walletProvider.send("wallet_switchEthereumChain", [
+  //         { chainId: networkToChoose.chainId },
+  //       ]);
+
+  //     } catch (switchError) {
+  //       if (switchError.code === -32602) {
+  //         try {
+  //           await walletProvider.send("wallet_addEthereumChain", [
+  //             { chainId: networkToChoose.chainId },
+  //           ]);
+  //         } catch (addError) {
+  //           console.log("add chain to metamask");
+  //         }
+  //       }
+  //     }
+  //   };
 
   return (
     <div
@@ -53,20 +54,22 @@ const Network = ({ networksToChoose }) => {
           {networksToChoose.map((networkToChoose) => (
             <li
               className={`flex items-center bg-slate-800 outline-none rounded-[10px] text-cente text-zinc-300 hover:text-slate-800 w-[130px] h-[27px] hover:bg-slate-200 border-[1px] border-cyan-500 my-[3px] text-[14px] `}
-              key={networkToChoose.chainName}
-              //   value={networkToChoose.chainName}
+              key={networkToChoose.chainId}
+              value={networkToChoose.chainName}
               onClick={() => handleNetworkClick(networkToChoose)}
             >
               <img
                 src={networkToChoose.image}
                 alt={networkToChoose.chainName}
-                className={`w-[20px] h-[20px] object-contain relative left-[20px] ${
+                className={` w-[20px] h-[20px] object-contain relative left-[20px] ${
                   isActive === networkToChoose.chainName
                     ? "grayscale-0"
                     : "text-orange-600"
                 }`}
               />
-              <p className="relative left-[30px]">{networkToChoose.chainName}</p>
+              <p className="relative left-[30px]">
+                {networkToChoose.chainName}
+              </p>
             </li>
           ))}
         </ul>
